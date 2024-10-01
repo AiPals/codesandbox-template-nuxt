@@ -4,18 +4,19 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'project-template-nuxt',
-    htmlAttrs: {
-      lang: 'en',
-    },
-    meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' },
-    ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+  title: 'project-template-nuxt',
+  htmlAttrs: {
+    lang: 'en',
   },
+  meta: [
+    // existing meta tags
+  ],
+  link: [
+    { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+    // Add this line to include the Doulos SIL font
+    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Doulos+SIL&display=swap' },
+  ],
+},
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
