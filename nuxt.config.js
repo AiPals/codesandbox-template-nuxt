@@ -1,22 +1,36 @@
 export default {
   // Target: https://go.nuxtjs.dev/config-target
-  target: 'static',
+  target: 'static', // For static site generation
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-  title: 'project-template-nuxt',
-  htmlAttrs: {
-    lang: 'en',
+    title: 'Alphabet Practice Sandbox',
+    htmlAttrs: {
+      lang: 'en',
+    },
+    meta: [
+      { charset: 'utf-8' },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1',
+      },
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'An interactive sandbox for practicing the English alphabet',
+      },
+      { name: 'format-detection', content: 'telephone=no' },
+    ],
+    link: [
+      // Favicon
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      // Phonetic Font
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Doulos+SIL&display=swap',
+      },
+    ],
   },
-  meta: [
-    // existing meta tags
-  ],
-  link: [
-    { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-    // Add this line to include the Doulos SIL font
-    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Doulos+SIL&display=swap' },
-  ],
-},
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
@@ -25,29 +39,40 @@ export default {
   plugins: [],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  components: true, // Auto-import components from the components/ directory
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    // https://go.nuxtjs.dev/typescript
+    // TypeScript support
     '@nuxt/typescript-build',
+    // Class-style components with TypeScript
+    '@nuxtjs/composition-api/module',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios',
+    // You can include additional Nuxt.js modules here if needed
   ],
-
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
-  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
-  
-  // Disable telemetry prompt when starting the dev server
+
+  // TypeScript configuration
+  typescript: {
+    typeCheck: true,
+    ignoreNotFoundWarnings: true,
+  },
+
+  // Deployment configuration
+  router: {
+    base: '/<repository-name>/', // Replace <repository-name> with your GitHub repo name
+  },
+
+  // Generate configuration
+  generate: {
+    dir: 'dist', // Directory for generated static files
+  },
+
+  // Disable telemetry prompt
   telemetry: false,
 }
