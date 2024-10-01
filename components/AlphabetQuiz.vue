@@ -26,62 +26,64 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'AlphabetQuiz',
-  data() {
-    return {
-      quizStarted: false,
-      letters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
-      currentLetter: '',
-      userAnswer: '',
-      feedback: '',
-      score: 0,
-      questionNumber: 0,
-      totalQuestions: 5,
-    };
-  },
-  methods: {
-    startQuiz() {
-      this.quizStarted = true;
-      this.score = 0;
-      this.questionNumber = 1;
-      this.nextQuestion();
-    },
-    nextQuestion() {
-      this.userAnswer = '';
-      this.feedback = '';
-      this.currentLetter =
-        this.letters[Math.floor(Math.random() * this.letters.length)];
-    },
-    playSound(letter) {
-      const audio = new Audio(`/sounds/${letter}.mp3`);
-      audio.play();
-    },
-    submitAnswer() {
-      if (this.userAnswer.toUpperCase() === this.currentLetter) {
-        this.feedback = 'Correct!';
-        this.score++;
-      } else {
-        this.feedback = `Incorrect. The correct letter was "${this.currentLetter}".`;
-      }
-      if (this.questionNumber < this.totalQuestions) {
-        this.questionNumber++;
-        setTimeout(() => {
-          this.nextQuestion();
-        }, 2000);
-      } else {
-        this.quizStarted = false;
-        this.questionNumber++;
-      }
-    },
-    restartQuiz() {
-      this.quizStarted = false;
-      this.score = 0;
-      this.questionNumber = 0;
-    },
-  },
-};
+<script lang="ts">
+import Vue from 'vue'
+import { Component } from 'vue-property-decorator'
+
+@Component
+export default class AlphabetQuiz extends Vue {
+  quizStarted = false
+  letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+  currentLetter = ''
+  userAnswer = ''
+  feedback = ''
+  score = 0
+  questionNumber = 0
+  totalQuestions = 5
+
+  startQuiz() {
+    this.quizStarted = true
+    this.score = 0
+    this.questionNumber = 1
+    this.nextQuestion()
+  }
+
+  nextQuestion() {
+    this.userAnswer = ''
+    this.feedback = ''
+    const randomIndex = Math.floor(Math.random() * this.letters.length)
+    this.currentLetter = this.letters[randomIndex]
+  }
+
+  playSound(letter: string) {
+    const audio = new Audio(`/sounds/${letter}.mp3`)
+    audio.play()
+  }
+
+  submitAnswer() {
+    if (this.userAnswer.toUpperCase() === this.currentLetter) {
+      this.feedback = 'Correct!'
+      this.score++
+    } else {
+      this.feedback = `Incorrect. The correct letter was "${this.currentLetter}".`
+    }
+    if (this.questionNumber < this.totalQuestions) {
+      this.questionNumber++
+      setTimeout(() => {
+        this.nextQuestion()
+      }, 2000)
+    } else {
+      this.quizStarted = false
+      this.questionNumber++
+    }
+  }
+
+  restartQuiz() {
+    this.quizStarted = false
+    this.score = 0
+    this.questionNumber = 0
+  }
+}
 </script>
 
 <style scoped>
